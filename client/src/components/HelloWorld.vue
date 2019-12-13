@@ -18,7 +18,7 @@ export default {
 
 <style scoped>
 .cookbook {
-  background-image: url('../assets/salad.jpg');
+  background-image: url('../assets/pancake.jpg');
   background-position: center;
   background-size: cover;
   width: 100vw;

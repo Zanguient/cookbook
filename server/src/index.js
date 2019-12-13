@@ -26,11 +26,15 @@ app.post('/posts', (req, res) => {
   var db = req.db;
   var title = req.body.title;
   var description = req.body.description;
+  var image = req.body.image;
+  var created = new Date;
   var new_post = new Post({
     title: title,
-    description: description
+    description: description,
+    image: image,
+    created: created
   })
-
+  console.log(req.body)
   new_post.save(function (error) {
     if (error) {
       console.log(error)
@@ -44,7 +48,7 @@ app.post('/posts', (req, res) => {
 
 // Fetch all posts
 app.get('/posts', (req, res) => {
-  Post.find({}, 'title description', function (error, posts) {
+  Post.find({}, 'title description image created', function (error, posts) {
     if (error) { console.error(error); }
     res.send({
       posts: posts
@@ -55,7 +59,7 @@ app.get('/posts', (req, res) => {
 // Fetch single post
 app.get('/post/:id', (req, res) => {
   var db = req.db;
-  Post.findById(req.params.id, 'title description', function (error, post) {
+  Post.findById(req.params.id, 'title description image created', function (error, post) {
     if (error) { console.error(error); }
     res.send(post)
   })
@@ -64,11 +68,14 @@ app.get('/post/:id', (req, res) => {
 // Update a post
 app.put('/posts/:id', (req, res) => {
   var db = req.db;
-  Post.findById(req.params.id, 'title description', function (error, post) {
+  Post.findById(req.params.id, 'title description image created', function (error, post) {
     if (error) { console.error(error); }
 
     post.title = req.body.title
     post.description = req.body.description
+    post.image = req.body.image
+    post.created = req.body.created
+    post.version = 
     post.save(function (error) {
       if (error) {
         console.log(error)

@@ -4,6 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Posts from '@/components/Posts'
 import NewPost from '@/components/NewPost'
 import EditPost from '@/components/EditPost'
+import Recipe from '@/components/Recipe'
 
 Vue.use(Router)
 
@@ -25,9 +26,14 @@ export default new Router({
       component: NewPost
     },
     {
-      path: '/posts/:id',
+      path: '/edit/:id',
       name: 'EditPost',
       component: EditPost
+    },
+    {
+      path: '/recipe/:id',
+      name: 'Recipe',
+      component: Recipe
     }
   ]
 })

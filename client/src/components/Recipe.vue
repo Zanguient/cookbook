@@ -1,17 +1,9 @@
 <template>
   <div class="posts">
-    <h1>Edit Recipe</h1>
-      <div class="form">
-        <div>
-          <input type="text" name="title" placeholder="TITLE" v-model="title">
-        </div>
-        <div>
-          <textarea rows="15" cols="15" placeholder="DESCRIPTION" v-model="description"></textarea>
-        </div>
-        <div>
-          <button class="app_post_btn" @click="updatePost">Update</button>
-        </div>
-      </div>
+    <h1>{{ title }}</h1>
+    <img :src="image"/>
+    <p>Description: {{ description }}</p>
+    <p>Created: {{ showDate(created) }}</p>
   </div>
 </template>
 
@@ -23,13 +15,17 @@ export default {
     return {
       title: '',
       description: '',
-      image: ''
+      image: '',
+      created: ''
     }
   },
   mounted () {
     this.getPost()
   },
   methods: {
+    showDate (date) {
+      return date.slice(4, 15)
+    },
     async getPost () {
       const response = await PostsService.getPost({
         id: this.$route.params.id
@@ -37,15 +33,7 @@ export default {
       this.title = response.data.title
       this.description = response.data.description
       this.image = response.data.image
-    },
-    async updatePost () {
-      await PostsService.updatePost({
-        id: this.$route.params.id,
-        title: this.title,
-        description: this.description,
-        image: this.$route.image
-      })
-      this.$router.push({ name: 'Posts' })
+      this.created = response.data.created
     }
   }
 }

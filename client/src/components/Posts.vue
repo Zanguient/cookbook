@@ -1,19 +1,25 @@
 <template>
   <div class="posts">
-    <h1>Posts</h1>
+    <h1>Recipes</h1>
     <div v-if="posts.length > 0" class="table-wrap">
       <div>
-        <router-link v-bind:to="{ name: 'NewPost' }" class="">Add Post</router-link>
+        <router-link v-bind:to="{ name: 'NewPost' }" class="">Add Recipe</router-link>
       </div>
       <table>
         <tr>
           <td>Title</td>
           <td width="550">Description</td>
-          <td width="100" align="center">Action</td>
+          <td width="100" align="center">Image</td>
+          <td>Date of creation</td>
+          <td>Action</td>
         </tr>
         <tr v-for="post in posts" :key="post.title">
           <td>{{ post.title }}</td>
           <td>{{ post.description }}</td>
+          <router-link v-bind:to="{ name: 'Recipe', params: { id: post._id } }">
+          <td><img :src="post.image" class="image"/></td>
+          </router-link>
+          <td>{{ showDate(post.created) }}</td>
           <td align="center">
             <router-link v-bind:to="{ name: 'EditPost', params: { id: post._id } }">Edit</router-link> |
             <a href="#" @click="deletePost(post._id)">Delete</a>
@@ -22,8 +28,8 @@
       </table>
     </div>
     <div v-else>
-      There are no posts.. Lets add one now <br /><br />
-      <router-link v-bind:to="{ name: 'NewPost' }" class="add_post_link">Add Post</router-link>
+      There are no recipes.. Lets add one now <br /><br />
+      <router-link v-bind:to="{ name: 'NewPost' }" class="add_post_link">Add Recipe</router-link>
     </div>
   </div>
 </template>
@@ -41,6 +47,9 @@ export default {
     this.getPosts()
   },
   methods: {
+    showDate (date) {
+      return date.slice(4, 15)
+    },
     async getPosts () {
       const response = await PostsService.fetchPosts()
       this.posts = response.data.posts
@@ -53,6 +62,11 @@ export default {
 }
 </script>
 <style type="text/css" scoped>
+.image {
+  width: 100px;
+  height: 100px;
+  border: none;
+}
 .table-wrap {
   width: 60%;
   margin: 0 auto;
@@ -71,16 +85,16 @@ table tr:nth-child(odd) {
   background: #f2f2f2;
 }
 table tr:nth-child(1) {
-  background: #4d7ef7;
-  color: #fff;
+  /* background: #4d7ef7; */
+  /* color: #fff; */
 }
 a {
-  color: #4d7ef7;
+  /* color: #4d7ef7; */
   text-decoration: none;
 }
 a.add_post_link {
-  background: #4d7ef7;
-  color: #fff;
+  /* background: #4d7ef7; */
+  /* color: #fff; */
   padding: 10px 80px;
   text-transform: uppercase;
   font-size: 12px;
