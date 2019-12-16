@@ -15,6 +15,7 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
+  background-color: rgb(53, 54, 54);
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

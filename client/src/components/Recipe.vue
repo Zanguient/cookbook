@@ -1,16 +1,24 @@
 <template>
-  <div class="posts">
-    <h1>{{ title }}</h1>
-    <img :src="image"/>
-    <p>Description: {{ description }}</p>
-    <p>Created: {{ showDate(created) }}</p>
+  <div>
+    <head-cook></head-cook>
+    <div class="recipe">
+      <h1>{{ title }}</h1>
+      <img :src="image" class="image" :alt="title"/>
+      <p>Description: {{ description }}</p>
+      <p class="date">Created: {{ showDate(created) }}</p>
+    </div>
   </div>
 </template>
 
 <script>
-import PostsService from '@/services/PostsService'
+import RecipesService from '@/services/RecipesService'
+import HeadCook from './HeadCook'
+
 export default {
-  name: 'EditPost',
+  name: 'EditRecipe',
+  components: {
+    HeadCook
+  },
   data () {
     return {
       title: '',
@@ -20,14 +28,14 @@ export default {
     }
   },
   mounted () {
-    this.getPost()
+    this.getRecipe()
   },
   methods: {
     showDate (date) {
       return date.slice(4, 15)
     },
-    async getPost () {
-      const response = await PostsService.getPost({
+    async getRecipe () {
+      const response = await RecipesService.getRecipe({
         id: this.$route.params.id
       })
       this.title = response.data.title
@@ -39,25 +47,32 @@ export default {
 }
 </script>
 <style type="text/css" scoped>
-.form input, .form textarea {
-  width: 500px;
-  padding: 10px;
-  border: 1px solid #e0dede;
-  outline: none;
-  font-size: 12px;
+.recipe {
+  color: white;
+  width: 80%;
+  max-width: 800px;
+  margin: 0 auto;
 }
-.form div {
-  margin: 20px;
+h1 {
+  margin: 50px;
+  font-size: 60px;
 }
-.app_post_btn {
-  background: #4d7ef7;
-  color: #fff;
-  padding: 10px 80px;
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: bold;
-  width: 520px;
-  border: none;
-  cursor: pointer;
+.image {
+  width: 100%;
+  margin-bottom: 30px;
+}
+p {
+  text-align: justify;
+}
+.date {
+  text-align: right;
+  font-size: 14px;
+  color: lightslategray;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
 }
 </style>

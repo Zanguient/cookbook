@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import Posts from '@/components/Posts'
-import NewPost from '@/components/NewPost'
-import EditPost from '@/components/EditPost'
+import CookBook from '@/components/CookBook'
+import Recipes from '@/components/Recipes'
+import NewRecipe from '@/components/NewRecipe'
+import EditRecipe from '@/components/EditRecipe'
 import Recipe from '@/components/Recipe'
 
 Vue.use(Router)
@@ -12,23 +12,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'CookBook',
+      component: CookBook
     },
     {
-      path: '/posts',
-      name: 'Posts',
-      component: Posts
+      path: '/recipes',
+      name: 'Recipes',
+      component: Recipes
     },
     {
-      path: '/posts/new',
-      name: 'NewPost',
-      component: NewPost
+      path: '/recipes/new',
+      name: 'NewRecipe',
+      component: NewRecipe
     },
     {
       path: '/edit/:id',
-      name: 'EditPost',
-      component: EditPost
+      name: 'EditRecipe',
+      component: EditRecipe
     },
     {
       path: '/recipe/:id',
