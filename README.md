@@ -9,6 +9,7 @@
 cd server
 npm install
 npm start
-cd ../client
+***
+cd client
 npm install
 npm run dev
