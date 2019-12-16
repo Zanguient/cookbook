@@ -13,3 +13,9 @@ npm start
 cd client
 npm install
 npm run dev
+
+#page to open:
+
+http://localhost:8080/#/recipes
+
+

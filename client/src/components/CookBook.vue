@@ -1,7 +1,7 @@
 <template>
   <div class="cookbook">
     <p class="main-title">
-      <router-link v-bind:to="{ name: 'Posts' }" class="route">Cookbook</router-link>
+      <router-link v-bind:to="{ name: 'Recipes' }" class="route">Cookbook</router-link>
     </p>
   </div>
 </template>
